@@ -2,6 +2,8 @@ import { BaseMemoryRepository } from '@project/libs/shared/core';
 import { BlogUserEntity } from './blog-user.entity';
 import { Injectable } from '@nestjs/common';
 
+
+//здесь изменил Promise<BlogUserEntity | null> на  undefined
 @Injectable()
 export class BlogUserRepository extends BaseMemoryRepository<BlogUserEntity> {
   public findByEmail(email: string): Promise<BlogUserEntity | undefined> {
