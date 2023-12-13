@@ -1,7 +1,7 @@
 import { UserStatus } from "./user-status.enum";
 
 export interface User {
-  _id?: string;
+  id?: string;
   email: string;
   firstname: string;
   lastname: string;

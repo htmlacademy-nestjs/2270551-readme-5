@@ -48,9 +48,9 @@ export class AuthenticationController {
     description: 'User found'
   })
 
-@Get(':id')
-   public async show(@Param('id') id: string) {
-     const existUser = await this.authService.getUser(id);
-     return fillDto(UserRdo, existUser.toPOJO());
-   }
+  @Get(':id')
+  public async getUser(@Param('id') id: string) {
+    const existUser = await this.authService.getUser(id);
+    return fillDto(UserRdo, existUser.toPOJO());
+  }
 }

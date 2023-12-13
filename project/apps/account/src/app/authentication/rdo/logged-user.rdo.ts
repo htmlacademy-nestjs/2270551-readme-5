@@ -7,19 +7,19 @@ import { ApiProperty } from '@nestjs/swagger';
     example: '12'
   })
    @Expose()
-   public id!: string;
+   public id: string;
 
   @ApiProperty({
      description: 'User email',
      example: 'user@user.local'
    })
    @Expose()
-   public email!: string;
+   public email: string;
 
   @ApiProperty({
      description: 'Access token',
      example: 'user@user.local'
    })
    @Expose()
-   public accessToken!: string;
+   public accessToken: string;
  }

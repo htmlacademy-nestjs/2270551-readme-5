@@ -1,4 +1,4 @@
-import { AuthUser,UserStatus } from '@project/libs/shared/app-types';
+import { AuthUser,User,UserStatus } from '@project/libs/shared/app-types';
 import { Entity } from '@project/libs/shared/core';
 import { compare, genSalt, hash } from 'bcrypt';
 import { SALT_ROUNDS } from './blog-user.constant';
@@ -11,12 +11,23 @@ import { SALT_ROUNDS } from './blog-user.constant';
    public avatar?: string;
    public status: UserStatus;
    public passwordHash: string;
-   public postsCount?:number;
-   public subscribersCount?:number;
+   //public postsCount?: number;
+   //public subscribersCount?: number;
 
    constructor(user: AuthUser) {
      this.populate(user)
    }
+
+   public populate(user: AuthUser): void {
+    this.email = user.email;
+    this.firstname = user.firstname;
+    this.lastname = user.lastname;
+    this.avatar = user.avatar;
+    this.status = user.status;
+    this.passwordHash = user.passwordHash;
+    //this.postsCount = user.postsCount;
+    //this.subscribersCount = user.subscribersCount;
+  }
 
    public toPOJO() {
      return {
@@ -27,23 +38,11 @@ import { SALT_ROUNDS } from './blog-user.constant';
        avatar: this.avatar,
        status: this.status,
        passwordHash: this.passwordHash,
-       postsCount: this.postsCount,
-       subscribersCount: this.subscribersCount,
+      // postsCount: this.postsCount,
+      // subscribersCount: this.subscribersCount,
      };
    }
 
-   public populate(data: AuthUser): void {
-     this.email = data.email;
-     this.firstname = data.firstname;
-     this.lastname = data.lastname;
-     this.avatar = data.avatar;
-     this.status = data.status;
-     this.passwordHash = data.passwordHash;
-     this.postsCount = data.postsCount;
-     this.subscribersCount = data.subscribersCount;
-
-
-   }
 
   public async setPassword(password: string): Promise<BlogUserEntity> {
     const salt = await genSalt(SALT_ROUNDS);

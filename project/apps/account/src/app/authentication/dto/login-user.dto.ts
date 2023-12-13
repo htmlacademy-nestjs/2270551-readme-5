@@ -5,11 +5,11 @@ export class LoginUserDto {
     description: 'User uniq email',
     example: 'user@user.ru',
   })
-  public email!: string;
+  public email: string;
 
   @ApiProperty({
     description: 'User password',
     example: '123456'
   })
-  public password!: string;
+  public password: string;
 }
