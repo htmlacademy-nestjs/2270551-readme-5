@@ -1,21 +1,39 @@
 import { Expose } from 'class-transformer';
+import { ApiProperty } from '@nestjs/swagger';
 
  export class UserRdo {
    @Expose()
-   public id: string;
+   @ApiProperty({
+    description: 'The uniq user ID',
+    example: '12'
+  })
+   public id!: string;
 
    @Expose()
-   public avatar: string;
+   @ApiProperty({
+    description: 'User avatar path',
+    example: '/images/user.png'
+  })
+   public avatar!: string;
 
    @Expose()
-   public dateOfBirth: string;
+   @ApiProperty({
+    description: 'User email',
+    example: 'user@user.local'
+  })
+   public email!: string;
 
    @Expose()
-   public email: string;
+   @ApiProperty({
+    description: 'User first name',
+    example: 'Keks'
+  })
+   public firstname!: string;
 
    @Expose()
-   public firstname: string;
-
-   @Expose()
-   public lastname: string;
+   @ApiProperty({
+    description: 'User last name',
+    example: 'Keks'
+  })
+   public lastname!: string;
  }
