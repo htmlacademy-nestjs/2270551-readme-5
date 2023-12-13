@@ -5,12 +5,12 @@ import { SALT_ROUNDS } from './blog-user.constant';
 
  export class BlogUserEntity implements AuthUser, Entity<string> {
    public id?: string;
-   public email!: string;
-   public firstname!: string;
-   public lastname!: string;
+   public email: string;
+   public firstname: string;
+   public lastname: string;
    public avatar?: string;
-   public status!: UserStatus;
-   public passwordHash!: string;
+   public status: UserStatus;
+   public passwordHash: string;
    public postsCount?:number;
    public subscribersCount?:number;
 
