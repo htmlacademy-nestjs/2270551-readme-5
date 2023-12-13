@@ -1,5 +1,17 @@
+# Login user by email and password
+ POST http://localhost:3000/api/auth/login HTTP/1.1
+ Content-Type: application/json
+
+ {
+   "email": "user@found.ru",
+   "password": "123456"
+ }
+
+###
+
+
 # Get user by ID
- GET http://localhost:3000/api/auth/0a0ad1bb-c1b6-49b2-af63-b4717f1baa1b HTTP/1.1
+ GET http://localhost:3000/api/auth/127e182e-ce30-4b90-8cd7-8b982eb3afc4 HTTP/1.1
 
 ###
 
@@ -21,17 +33,6 @@
 
 
 # Get user by ID
- GET http://localhost:3000/api/auth/0a0ad1bb-c1b6-49b2-af63-b4717f1baa1b HTTP/1.1
-
- ###
-
-# Login user by email and password
- POST http://localhost:3000/api/auth/login HTTP/1.1
- Content-Type: application/json
-
- {
-   "email": "user@notfound.local",
-   "password": "123456"
- }
+ GET http://localhost:3000/api/auth/127e182e-ce30-4b90-8cd7-8b982eb3afc4 HTTP/1.1
 
  ###
