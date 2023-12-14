@@ -11,7 +11,7 @@
 
 
 # Get user by ID
- GET http://localhost:3000/api/auth/7d9ed6bb-717c-4c2f-aef7-c914163f743a HTTP/1.1
+ GET http://localhost:3000/api/auth/b560a8a3-a772-425d-85ce-29de4722eb67 HTTP/1.1
 
 ###
 
@@ -33,6 +33,6 @@
 
 
 # Get user by ID
- GET http://localhost:3000/api/auth/7d9ed6bb-717c-4c2f-aef7-c914163f743a HTTP/1.1
+ GET http://localhost:3000/api/auth/b560a8a3-a772-425d-85ce-29de4722eb67 HTTP/1.1
 
  ###
