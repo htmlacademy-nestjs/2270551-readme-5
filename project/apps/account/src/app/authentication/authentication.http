@@ -1,0 +1,38 @@
+# Login user by email and password
+ POST http://localhost:3000/api/auth/login HTTP/1.1
+ Content-Type: application/json
+
+ {
+   "email": "user@found.ru",
+   "password": "123456"
+ }
+
+###
+
+
+# Get user by ID
+ GET http://localhost:3000/api/auth/b560a8a3-a772-425d-85ce-29de4722eb67 HTTP/1.1
+
+###
+
+
+
+
+# Create a new user
+ POST http://localhost:3000/api/auth/register HTTP/1.1
+ Content-Type: application/json
+
+ {
+   "email": "user@found.ru",
+   "firstname": "Keks",
+   "lastname": "Smith",
+   "password": "123456"
+ }
+
+###
+
+
+# Get user by ID
+ GET http://localhost:3000/api/auth/b560a8a3-a772-425d-85ce-29de4722eb67 HTTP/1.1
+
+ ###

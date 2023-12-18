@@ -4,6 +4,7 @@
     "rootDir": ".",
     "sourceMap": true,
     "declaration": false,
+    "strictPropertyInitialization": false,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -14,8 +15,12 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "strict": true,
-    "paths": {}
+
+    "paths": {
+      "@project/libs/shared/app-types": ["libs/shared/app-types/src/index.ts"],
+      "@project/libs/shared/helpers": ["libs/shared/helpers/src/index.ts"],
+      "@project/libs/shared/core": ["libs/shared/core/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
