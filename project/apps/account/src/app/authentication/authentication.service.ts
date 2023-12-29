@@ -1,5 +1,7 @@
-import { ConflictException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { ConflictException, Inject, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import dayjs from 'dayjs';
+import { ConfigType } from '@nestjs/config';
+import { dbConfig } from '@project/shared/config/account';
 import { UserStatus } from '@project/libs/shared/app-types';
 import { BlogUserRepository } from '../blog-user/blog-user.repository';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -11,8 +13,16 @@ import { LoginUserDto } from './dto/login-user.dto';
 @Injectable()
 export class AuthenticationService {
   constructor(
-    private readonly blogUserRepository: BlogUserRepository
-  ) {}
+    private readonly blogUserRepository: BlogUserRepository,
+
+    @Inject(dbConfig.KEY)
+    private readonly databaseConfig: ConfigType<typeof dbConfig>,
+  ) {
+     // Извлекаем настройки из конфигурации
+     console.log(databaseConfig.host);
+     console.log(databaseConfig.user);
+  }
+
   public async register(dto: CreateUserDto) {
     const {email, firstname, lastname, password } = dto;
 
