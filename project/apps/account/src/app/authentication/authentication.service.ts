@@ -62,7 +62,13 @@ public async verifyUser(dto: LoginUserDto) {
 }
 
 public async getUser(id: string) {
-  return this.blogUserRepository.findById(id);
+  const existUser = await this.blogUserRepository.findById(id);
+
+  if (! existUser) {
+    throw new NotFoundException(`User with id ${id} not found`);
+  }
+
+  return existUser;
 }
 
 }
