@@ -1,7 +1,7 @@
 ###
 
 # Create a new text blog
-POST http://localhost:3000/api/blog HTTP/1.1
+POST http://localhost:3333/api/blog HTTP/1.1
 Content-Type: application/json
 
 {
@@ -19,13 +19,13 @@ Content-Type: application/json
 ###
 
 # Login user by email and password
-GET http://localhost:3000/api/blog/28f02d10-f8a6-4732-8e60-87203598bbb9 HTTP/1.1
+GET http://localhost:3333/api/blog/28f02d10-f8a6-4732-8e60-87203598bbb9 HTTP/1.1
 Content-Type: application/json
 
 ###
 
 # Change user password
-PUT http://localhost:3000/api/blog/fb2c6401-a451-4bd0-b663-11cfa9ec6610 HTTP/1.1
+PUT http://localhost:3333/api/blog/fb2c6401-a451-4bd0-b663-11cfa9ec6610 HTTP/1.1
 Content-Type: application/json
 
 {

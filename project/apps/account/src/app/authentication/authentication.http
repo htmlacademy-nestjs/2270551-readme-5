@@ -11,7 +11,7 @@
 
 
 # Get user by ID
- GET http://localhost:3333/api/auth/b560a8a3-a772-425d-85ce-29de4722eb67 HTTP/1.1
+ GET http://localhost:3333/api/auth/659074fc9560188218b1fe4e HTTP/1.1
 
 ###
 
@@ -23,9 +23,9 @@
  Content-Type: application/json
 
  {
-   "email": "user@found.ru",
-   "firstname": "Keks",
-   "lastname": "Smith",
+   "email": "user551@found.ru",
+   "firstname": "Keks551",
+   "lastname": "Smith551",
    "password": "123456"
  }
 
