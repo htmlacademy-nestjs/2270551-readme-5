@@ -10,7 +10,7 @@ export class PhotoBlogEntity implements PhotoBlogContent {
   }
 
 
-  public toPlainObject() {
+  public toPOJO() {
     return {
       path: this.path,
       name: this.name,

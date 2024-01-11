@@ -7,7 +7,7 @@ export class BaseBlogContentEntity implements BaseBlogContent {
     this.populate(blog);
   }
 
-  public toPlainObject() {
+  public toPOJO() {
     return {
       id: this.id,
     };
