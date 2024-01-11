@@ -17,7 +17,7 @@ export class BlogEntity implements Blog {
   }
 
 
-  public toPlainObject() {
+  public toPOJO() {
     return {
       type: this.type,
       id: this.id,

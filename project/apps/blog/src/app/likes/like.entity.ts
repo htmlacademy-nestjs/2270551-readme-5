@@ -10,7 +10,7 @@ export class LikeEntity implements Like {
   }
 
 
-  public toPlainObject() {
+  public toPOJO() {
     return {
       id: this.id,
       blogId: this.blogId,
