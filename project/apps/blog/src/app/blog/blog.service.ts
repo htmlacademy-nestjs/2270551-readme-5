@@ -65,7 +65,7 @@ export class BlogService {
       throw new NotFoundException(NOT_FOUND_BLOG_CONTENT);
     }
     const {content: _, ...updatetBlogInfo} = dto;
-    const blogEntity = new BlogEntity({...existBlog.toPlainObject(), ...updatetBlogInfo});
+    const blogEntity = new BlogEntity({...existBlog.toPOJO(), ...updatetBlogInfo});
     const newBlog = await this.blogRepository.update(id, blogEntity);
     return fillDto(BlogRdo, {...newBlog , content: {...content, type: newBlog.type}}, {
       enableImplicitConversion: true

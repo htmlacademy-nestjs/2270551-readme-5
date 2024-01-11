@@ -11,7 +11,7 @@ export class TextBlogEntity implements TextBlogContent {
   }
 
 
-  public toPlainObject() {
+  public toPOJO() {
     return {
       name: this.name,
       annotation: this.annotation,

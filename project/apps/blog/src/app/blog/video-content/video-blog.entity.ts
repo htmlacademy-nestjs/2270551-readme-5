@@ -9,7 +9,7 @@ export class VideoBlogEntity implements VideoBlogContent {
     this.populate(blog);
   }
 
-  public toPlainObject() {
+  public toPOJO() {
     return {
       name: this.name,
       link: this.link,

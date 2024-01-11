@@ -54,4 +54,8 @@ import { SALT_ROUNDS } from './blog-user.constant';
     return compare(password, this.passwordHash);
   }
 
+  static fromObject(data: AuthUser): BlogUserEntity {
+    return new BlogUserEntity(data);
+  }
+
  }

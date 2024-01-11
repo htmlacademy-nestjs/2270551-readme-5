@@ -10,7 +10,7 @@ export class LinkBlogEntity implements LinkBlogContent {
   }
 
 
-  public toPlainObject() {
+  public toPOJO() {
     return {
       link: this.link,
       description: this.description,

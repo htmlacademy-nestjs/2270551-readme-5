@@ -7,25 +7,25 @@ Content-Type: application/json
 {
   "type": "text",
   "content": {
-   "firstname": "Keks",
-   "lastname": "Smith",
+   "firstname": "Ivan",
+   "lastname": "Dorn",
     "annotation": "cats",
     "content": "cute cats play together"
   },
-  "author": "Adam Morgan",
+  "author": "Ivan Dorn",
   "tags": ["cats"]
 }
 
 ###
 
 # Login user by email and password
-GET http://localhost:3000/api/blog/28f02d10-f8a6-4732-8e60-87203598bbb9 HTTP/1.1
+GET http://localhost:3000/api/blog/dbb7474c-a115-4892-b309-fd594421d94e HTTP/1.1
 Content-Type: application/json
 
 ###
 
 # Change user password
-PUT http://localhost:3000/api/blog/fb2c6401-a451-4bd0-b663-11cfa9ec6610 HTTP/1.1
+PUT http://localhost:3333/api/blog/с88d8b49d-d67e-423c-8830-322919876851 HTTP/1.1
 Content-Type: application/json
 
 {
@@ -41,7 +41,7 @@ Content-Type: application/json
 ###
 
 # Change user password
-DELETE http://localhost:3000/api/blog/cfd84542-6f3c-4a22-9295-e961a676352f HTTP/1.1
+DELETE http://localhost:3333/api/blog/88d8b49d-d67e-423c-8830-322919876851 HTTP/1.1
 Content-Type: application/json
 
 ###

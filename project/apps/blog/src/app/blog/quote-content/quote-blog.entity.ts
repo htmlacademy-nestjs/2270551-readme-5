@@ -10,7 +10,7 @@ export class QuoteBlogEntity implements QuoteBlogContent {
   }
 
 
-  public toPlainObject() {
+  public toPOJO() {
     return {
       quote: this.quote,
       author: this.author,

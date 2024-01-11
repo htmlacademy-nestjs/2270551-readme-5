@@ -1,5 +1,5 @@
 # Create a new user
-PUT http://localhost:3000/api/likes/3ef6821d-ace4-433b-8990-6f8bd10ea5b9 HTTP/1.1
+PUT http://localhost:3000/api/likes/dbb7474c-a115-4892-b309-fd594421d94e HTTP/1.1
 Content-Type: application/json
 
 {
@@ -9,7 +9,7 @@ Content-Type: application/json
 ###
 
 # Login user by email and password
-GET http://localhost:3000/api/likes/3ef6821d-ace4-433b-8990-6f8bd10ea5b9 HTTP/1.1
+GET http://localhost:3333/api/likes/65a0187cf1cc30be8222faeb HTTP/1.1
 Content-Type: application/json
 
 ###
