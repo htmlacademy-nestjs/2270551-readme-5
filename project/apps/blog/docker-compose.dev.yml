@@ -1,37 +1,44 @@
 version: '3.9'
 services:
-   readme-551.blog.mongo:
-     image: mongo:4.4
-     restart: always
-     container_name: readme-551.blog.mongo
+  readme.blog.postgres:
+    image: postgres:14-alpine
+    container_name: readme.blog.postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - 5432:5432
+    volumes:
+      - readme.postgres.blog:/var/lib/postgresql/data
 
-     environment:
-       MONGO_INITDB_ROOT_USERNAME: admin
-       MONGO_INITDB_ROOT_PASSWORD: test
-       MONGO_INITDB_DATABASE: readme-551
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER} -d {POSTGRES_DB}']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
 
-     ports:
-       - 27018:27018
+    networks:
+      - readme.blog
 
-     volumes:
-       - readme-551.mongo.blog:/data/db
-
-     healthcheck:
-       test: echo 'db.runCommand("ping").ok' | mongosh localhost:27018/readme-551 --quiet
-       interval: 10s
-       timeout: 10s
-       retries: 5
-
-   readme-551.user.mongo.ui:
-     image: mongo-express
-     restart: always
-     container_name: readme-551.user.mongo.ui
-     ports:
-       - 8081:8081
-     environment:
-       ME_CONFIG_MONGODB_ADMINUSERNAME: admin
-       ME_CONFIG_MONGODB_ADMINPASSWORD: test
-       ME_CONFIG_MONGODB_URL: mongodb://admin:test@readme-551.blog.mongo:27018/
+  readme.blog.pgadmin:
+    image: dpage/pgadmin4
+    container_name: readme.blog.pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    ports:
+      - 8082:80
+    depends_on:
+      - readme.blog.postgres
+    networks:
+      - readme.blog
 
 volumes:
-   readme-551.mongo.blog:
+  readme.postgres.blog:
+
+networks:
+  readme.blog:
+    driver: bridge
