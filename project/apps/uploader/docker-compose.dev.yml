@@ -1,0 +1,26 @@
+version: '3.9'
+services:
+   readme-551.uploader.mongo:
+     image: mongo:4.4
+     restart: always
+     container_name: readme-551.uploader.mongo
+
+     environment:
+       MONGO_INITDB_ROOT_USERNAME: admin
+       MONGO_INITDB_ROOT_PASSWORD: test
+       MONGO_INITDB_DATABASE: readme-551
+
+     ports:
+       - 27020:27020
+
+     volumes:
+       - readme-551.mongo.uploader:/data/db
+
+     healthcheck:
+       test: echo 'db.runCommand("ping").ok' | mongosh localhost:27020/readme-551 --quiet
+       interval: 10s
+       timeout: 10s
+       retries: 5
+
+volumes:
+   readme-551.mongo.uploader:
