@@ -12,6 +12,7 @@ datasource db {
 
 model Blog {
   id           String     @id @default(uuid())
+  categories   Category[]
   type         String
   createdDate  DateTime   @default(now()) @map("created_date")
   postedDate   DateTime   @updatedAt @map("posted_date")
@@ -32,6 +33,16 @@ model Blog {
   @@map("blogs")
 }
 
+
+model Category {
+   id        String  @id @default(uuid())
+   title     String
+   posts     Blog[]
+   createdAt   DateTime @default(now()) @map("created_at")
+   updatedAt   DateTime @updatedAt @map("updated_at")
+   @@index([title])
+   @@map("categories")
+ }
 model TextBlog {
   id         String @id @default(uuid())
   name       String
