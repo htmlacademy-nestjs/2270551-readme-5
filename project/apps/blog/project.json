@@ -53,5 +53,14 @@
       }
     }
   },
+
+"db:lint": {
+  "executor": "nx:run-commands",
+  "options": {
+    "command": "npx prisma validate --schema ./schema.prisma",
+    "cwd": "shared/blog/models/prisma"
+  }
+},
+
   "tags": []
 }
