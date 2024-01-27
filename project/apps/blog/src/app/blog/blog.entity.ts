@@ -1,5 +1,5 @@
 import {Blog, BlogContent, BlogStatus, BlogType} from '@project/libs/shared/app-types'
-import { Category } from 'libs/shared/app-types/src/lib/category.interface';
+import { Category } from '@project/libs/shared/app/types';
 
 export class BlogEntity implements Blog {
   public type: BlogType;
