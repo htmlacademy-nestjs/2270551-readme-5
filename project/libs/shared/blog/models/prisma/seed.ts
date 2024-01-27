@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+const prisma = new PrismaClient();
 
 const FIRST_POST_UUID = '6d308040-96a2-4162-bea6-2338e9976540';
 const SECOND_POST_UUID = 'ab04593b-da99-4fe3-8b4b-e06d82e2efdd';

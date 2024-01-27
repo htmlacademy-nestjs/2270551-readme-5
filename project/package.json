@@ -24,7 +24,7 @@
     "tslib": "^2.3.0"
   },
   "prisma": {
-    "schema": "prisma/schema.prisma"
+    "schema": "./libs/shared/blog/models/prisma/schema.prisma"
   },
   "devDependencies": {
     "@nestjs/schematics": "^10.0.1",
