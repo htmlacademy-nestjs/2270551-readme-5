@@ -1,42 +1,29 @@
-import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { BlogRepository } from './blog.repository';
-import { BlogContent, CreateBlogDto } from './dto/create-blog.dto';
-import { Blog, BlogStatus, LinkBlogContent } from '@project/libs/shared/app-types';
-import { NOT_CREATE_BLOG_CONTENT, NOT_FOUND_BLOG, NOT_FOUND_BLOG_CONTENT } from './constants';
+import { CreateBlogDto } from './dto/create-blog.dto';
 import { BlogEntity } from './blog.entity';
-import {fillDto} from '@project/libs/shared/helpers';
-import { BlogRdo } from './rdo/blog.rdo';
 import { UpdateBlogDto } from './dto/update-blog.dto';
-import { BaseBlogContentService } from './base-blog/blog.service';
-import { baseBlogEntityFactory } from './base-blog/blog.factory';
+import { NOT_FOUND_BLOG } from './constants';
+import { BlogQuery } from './query/blog-query';
+import { fillDto } from '@project/libs/shared/helpers';
+import { BlogRdo } from './rdo/blog.rdo';
+import { BlogPostWithPaginationRdo } from './rdo/blogs.rdo';
 
 @Injectable()
 export class BlogService {
   constructor(
     private readonly blogRepository: BlogRepository,
-    private readonly baseBlogContentService: BaseBlogContentService
   ) { }
 
   public async create(dto: CreateBlogDto) {
-    let contentId: string | null = null;
-    const baseBlogContentEntity = baseBlogEntityFactory(dto.type, dto.content);
-    contentId = (await this.baseBlogContentService.save(dto.type, baseBlogContentEntity)).id;
-    if (contentId === null) {
-      throw new ConflictException(NOT_CREATE_BLOG_CONTENT);
-    }
-    const blog: Blog = {
-      type: dto.type,
-      createdDate: new Date(),
-      postedDate: new Date(),
-      status: BlogStatus.Draft,
-      userId: dto.user,
-      tags: dto.tags,
-      repost: false,
-      categories: [],
-      content: new LinkBlogContent
-    }
-    const blogEntity = new BlogEntity(blog);
-    return this.blogRepository.save(blogEntity);
+    const blogEntity = new BlogEntity(dto);
+    const blog = await this.blogRepository.save(blogEntity);
+    return fillDto(BlogRdo, blog);
+  }
+
+  public async find(param: BlogQuery) {
+    const blogs = await this.blogRepository.find(param);
+    return fillDto(BlogPostWithPaginationRdo, blogs);
   }
 
   public async findById(id: string) {
@@ -44,14 +31,8 @@ export class BlogService {
     if (!existBlog) {
       throw new NotFoundException(NOT_FOUND_BLOG);
     }
-    let content: BlogContent | null = null;
-    content = (await this.baseBlogContentService.findById(existBlog.type, existBlog.contentId));
-    if (content === null) {
-      throw new NotFoundException(NOT_FOUND_BLOG_CONTENT);
-    }
-    return fillDto(BlogRdo, {...existBlog , content: {...content, type: existBlog.type}}, {
-      enableImplicitConversion: true
-    })
+    const blog = await this.blogRepository.findById(id);
+    return fillDto(BlogRdo, blog);
   }
 
   public async updateById(id: string, dto: UpdateBlogDto) {
@@ -59,18 +40,9 @@ export class BlogService {
     if (!existBlog) {
       throw new NotFoundException(NOT_FOUND_BLOG);
     }
-    let content: BlogContent | null = null;
-    const baseBlogContentEntity = baseBlogEntityFactory(existBlog.type, dto.content);
-    content = (await this.baseBlogContentService.update(existBlog.type, existBlog.contentId, baseBlogContentEntity));
-    if (content === null) {
-      throw new NotFoundException(NOT_FOUND_BLOG_CONTENT);
-    }
-    const {content: _, ...updatetBlogInfo} = dto;
-    const blogEntity = new BlogEntity({...existBlog.toPOJO(), ...updatetBlogInfo});
-    const newBlog = await this.blogRepository.update(id, blogEntity);
-    return fillDto(BlogRdo, {...newBlog , content: {...content, type: newBlog.type}}, {
-      enableImplicitConversion: true
-    })
+    const newBlogEntity = new BlogEntity({...existBlog, ...dto});
+    const blog = await this.blogRepository.updateById(id, existBlog, newBlogEntity);
+    return fillDto(BlogRdo, blog);
   }
 
   public async deleteById(id: string) {
@@ -78,7 +50,19 @@ export class BlogService {
     if (!existBlog) {
       throw new NotFoundException(NOT_FOUND_BLOG);
     }
-    await this.baseBlogContentService.deleteById(existBlog.type, existBlog.contentId);
-    await this.blogRepository.deleteById(id);
+    return await this.blogRepository.deleteById(id);
+  }
+
+  public async repostById(id: string, userId: string) {
+    const existBlog = await this.blogRepository.findById(id);
+    if (!existBlog) {
+      throw new NotFoundException(NOT_FOUND_BLOG);
+    }
+    if (existBlog.userId === userId) {
+      throw new BadRequestException();
+    }
+
+    const blog = await this.blogRepository.repostById(userId, existBlog);
+    return fillDto(BlogRdo, blog);
   }
 }
