@@ -25,7 +25,7 @@
       "@project/libs/shared/helpers": ["libs/shared/helpers/src/index.ts"],
       "@project/shared/config/account": [
         "libs/shared/config/account/src/index.ts"
-      ]
+      ],
     }
   },
   "exclude": ["node_modules", "tmp"]

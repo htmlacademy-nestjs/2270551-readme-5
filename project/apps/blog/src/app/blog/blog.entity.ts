@@ -1,4 +1,5 @@
-import {Blog, BlogStatus, BlogType} from '@project/libs/shared/app-types'
+import {Blog, BlogContent, BlogStatus, BlogType} from '@project/libs/shared/app-types'
+import { Category } from 'libs/shared/app-types/src/lib/category.interface';
 
 export class BlogEntity implements Blog {
   public type: BlogType;
@@ -11,10 +12,12 @@ export class BlogEntity implements Blog {
   public tags: string[];
   public repost: boolean;
   public repostId: string;
+  public content: BlogContent;
 
   constructor(blog: Blog) {
     this.populate(blog);
   }
+  categories: Category[];
 
 
   public toPOJO() {
@@ -36,7 +39,7 @@ export class BlogEntity implements Blog {
     this.type = data.type;
     this.id = data.id;
     this.author = data.author;
-    this.contentId = data.contentId;
+    this.content = data.content;
     this.createdDate = data.createdDate;
     this.postedDate = data.postedDate;
     this.repost = data.repost;

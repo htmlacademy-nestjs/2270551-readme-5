@@ -1,7 +1,7 @@
 import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { BlogRepository } from './blog.repository';
 import { BlogContent, CreateBlogDto } from './dto/create-blog.dto';
-import { Blog, BlogStatus } from '@project/libs/shared/app-types';
+import { Blog, BlogStatus, LinkBlogContent } from '@project/libs/shared/app-types';
 import { NOT_CREATE_BLOG_CONTENT, NOT_FOUND_BLOG, NOT_FOUND_BLOG_CONTENT } from './constants';
 import { BlogEntity } from './blog.entity';
 import {fillDto} from '@project/libs/shared/helpers';
@@ -26,13 +26,14 @@ export class BlogService {
     }
     const blog: Blog = {
       type: dto.type,
-      contentId,
       createdDate: new Date(),
       postedDate: new Date(),
       status: BlogStatus.Draft,
       author: dto.author,
       tags: dto.tags,
-      repost: false
+      repost: false,
+      categories: [],
+      content: new LinkBlogContent
     }
     const blogEntity = new BlogEntity(blog);
     return this.blogRepository.save(blogEntity);

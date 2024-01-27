@@ -14,6 +14,8 @@ export * from './lib/blog-content.interface';
 export * from './lib/blog-with-comments-likes.interface';
 
 export * from './lib/like.interface';
+export * from './lib/category.interface';
+export * from './lib/comment.interface';
 
 
 
