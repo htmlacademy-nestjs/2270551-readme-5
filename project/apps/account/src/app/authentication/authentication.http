@@ -31,8 +31,15 @@
 
 ###
 
+# Demo route for Pipe
+GET http://localhost:3333/api/auth/demo/1 HTTP/1.1.
+
+###
 
 # Get user by ID
  GET http://localhost:3000/api/auth/b560a8a3-a772-425d-85ce-29de4722eb67 HTTP/1.1
 
  ###
+
+
+
