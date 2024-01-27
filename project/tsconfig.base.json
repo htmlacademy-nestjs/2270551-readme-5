@@ -18,11 +18,14 @@
     "strict": false,
     "paths": {
       "@project/libs/shared/app-types": ["libs/shared/app-types/src/index.ts"],
+      "@project/libs/shared/blog/models": [
+        "libs/shared/blog/models/src/index.ts"
+      ],
       "@project/libs/shared/core": ["libs/shared/core/src/index.ts"],
       "@project/libs/shared/helpers": ["libs/shared/helpers/src/index.ts"],
       "@project/shared/config/account": [
         "libs/shared/config/account/src/index.ts"
-      ]
+      ],
     }
   },
   "exclude": ["node_modules", "tmp"]
