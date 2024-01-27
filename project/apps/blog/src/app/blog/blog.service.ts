@@ -29,7 +29,7 @@ export class BlogService {
       createdDate: new Date(),
       postedDate: new Date(),
       status: BlogStatus.Draft,
-      author: dto.author,
+      userId: dto.author,
       tags: dto.tags,
       repost: false,
       categories: [],
