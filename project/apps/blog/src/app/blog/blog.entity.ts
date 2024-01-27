@@ -8,7 +8,7 @@ export class BlogEntity implements Blog {
   public createdDate: Date;
   public postedDate: Date;
   public status: BlogStatus;
-  public author: string;
+  public userId: string;
   public tags: string[];
   public repost: boolean;
   public repostId: string;
@@ -24,7 +24,7 @@ export class BlogEntity implements Blog {
     return {
       type: this.type,
       id: this.id,
-      author: this.author,
+      userId: this.userId,
       contentId: this.contentId,
       createdDate: this.createdDate,
       postedDate: this.postedDate,
@@ -40,7 +40,7 @@ export class BlogEntity implements Blog {
   public populate(data: Blog): void {
     this.type = data.type;
     this.id = data.id;
-    this.author = data.author;
+    this.userId = data.userId;
     this.content = data.content;
     this.createdDate = data.createdDate;
     this.postedDate = data.postedDate;
