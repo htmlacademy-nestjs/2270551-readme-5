@@ -1,6 +1,67 @@
-import { BlogType, VideoBlogContent } from '@project/libs/shared/app-types';
-import { BlogContent } from './dto/create-blog.dto';
+import { BlogType, SortDirection, SortType } from '@project/libs/shared/app-types';
+ import { VideoBlogEntity } from './video-content/video-blog.entity';
+ import { LinkBlogEntity } from './link-content/link-blog.entity';
+ import { PhotoBlogEntity } from './photo-content/photo-blog.entity';
+ import { QuoteBlogEntity } from './quote-content/quote-blog.entity';
+ import { TextBlogEntity } from './text-content/text-blog.entity';
+ import { Prisma } from '@prisma/client';
 
-export const isVideoBlogConent = (type: BlogType, content: BlogContent): content is VideoBlogContent => {
+ export type UnionBlogEntity = VideoBlogEntity | TextBlogEntity | LinkBlogEntity | PhotoBlogEntity | QuoteBlogEntity;
+
+export const isVideoBlogEntity = (type: BlogType, entity: UnionBlogEntity): entity is VideoBlogEntity => {
   return type === BlogType.Video;
 }
+export const isTextBlogEntity = (type: BlogType, entity: UnionBlogEntity): entity is TextBlogEntity => {
+  return type === BlogType.Text;
+}
+export const isLinkBlogEntity = (type: BlogType, entity: UnionBlogEntity): entity is LinkBlogEntity => {
+  return type === BlogType.Link;
+}
+export const isPhotoBlogEntity = (type: BlogType, entity: UnionBlogEntity): entity is PhotoBlogEntity => {
+  return type === BlogType.Photo;
+}
+ export const isQuoteBlogEntity = (type: BlogType, entity: UnionBlogEntity): entity is QuoteBlogEntity => {
+   return type === BlogType.Quote;
+ }
+
+ export interface BlogSorting {
+   sort?: SortType;
+   direction?: SortDirection;
+ }
+
+ export interface BlogFilter {
+   type?: BlogType
+ }
+
+ export function blogFilter(filter: BlogFilter): Prisma.BlogWhereInput | undefined {
+   if (!filter) {
+     return undefined;
+   }
+
+   let prismaFilter: Prisma.BlogWhereInput = {};
+
+   if (filter.type) {
+     prismaFilter = { type: filter.type };
+   }
+
+   return prismaFilter;
+ }
+
+ export function blogSort(sortParams: BlogSorting): Prisma.BlogOrderByWithRelationInput | undefined {
+   if (!sortParams) {
+     return undefined;
+   }
+   const {sort, direction} = sortParams;
+   let prismaFilter: Prisma.BlogOrderByWithRelationInput = {};
+   if (sort === SortType.Date) {
+     prismaFilter = {[sort]: direction}
+   }
+
+   if (sort === SortType.Likes || sort === SortType.Comments) {
+     prismaFilter = { [sort]: {
+       _count: direction
+     } };
+   }
+
+   return prismaFilter;
+ }
