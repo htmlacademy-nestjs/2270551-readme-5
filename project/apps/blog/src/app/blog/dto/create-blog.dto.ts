@@ -5,6 +5,6 @@ export type BlogContent = LinkBlogContent | TextBlogContent | VideoBlogContent |
 export class CreateBlogDto {
   public type: BlogType;
   public content: BlogContent;
-  public author: string;
+  public user: string;
   public tags: string[];
 }
