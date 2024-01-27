@@ -32,6 +32,8 @@ export class BlogEntity implements Blog {
       repostId: this.repostId,
       status: this.status,
       tags: this.tags,
+      categories: this.categories,
+      content: this.content,
     };
   }
 
