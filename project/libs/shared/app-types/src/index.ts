@@ -16,6 +16,8 @@ export * from './lib/user.interface';
 export * from './lib/user-status.enum';
 export * from './lib/sort-direction.iterface'
 export * from './lib/sort-type.iterface'
+export * from './lib/token-payload.interface';
+export * from './lib/token.interface';
 
 export * from './lib/like.interface';
 export * from './lib/category.interface';
