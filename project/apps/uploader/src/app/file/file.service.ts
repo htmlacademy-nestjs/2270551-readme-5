@@ -4,6 +4,8 @@ import { ConfigType } from '@nestjs/config';
 import { ensureDir } from 'fs-extra';
 import { writeFile } from 'node:fs/promises';
 import uploaderConfig from 'libs/shared/config/uploader/src/lib/uploader.config';
+import dayjs from 'dayjs';
+import { extend } from 'joi';
 
 @Injectable()
 export class FileService {
@@ -12,8 +14,14 @@ export class FileService {
     private readonly applicationConfig: ConfigType < typeof uploaderConfig >,
   ) {}
   public async writeFile (file: Express.Multer.File): Promise <string> {
-    const uploadDirectoryPath = this.applicationConfig.uploadDirectory;
-    const destinationFile = `${uploadDirectoryPath}/${file.originalname}`;
+    const [year, month] = dayjs().format('YYYY MM').split(' ');
+    const { uploadDirectory } = this.applicationConfig;
+    const uploadDirectoryPath = `${uploadDirectory}/${year}/${month}`;
+
+    const filename = crypto.randomUUID();
+    const fileExtension = extension(file.mimetype);
+
+    const destinationFile = `${uploadDirectoryPath}/${filename}.${fileExtension}`;
 
     await ensureDir (uploadDirectoryPath);
     await writeFile (destinationFile, file.buffer);
@@ -21,3 +29,7 @@ export class FileService {
     return destinationFile;
   }
 }
+function extension(mimetype: string) {
+  throw new Error('Function not implemented.');
+}
+

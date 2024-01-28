@@ -1,32 +1,27 @@
 import { registerAs } from '@nestjs/config';
- import * as Joi from 'joi';
+import * as Joi from 'joi';
 
- export interface JWTConfig {
+export interface JWTConfig {
    accessTokenSecret: string;
    accessTokenExpiresIn: string;
  }
 
- const validationSchema = Joi.object({
-   accessTokenSecret: Joi.string().required(),
-   accessTokenExpiresIn: Joi.string().required(),
- });
+export default registerAs ('jwt', (): JWTConfig => {
+  const config: JWTConfig = {
+    accessTokenSecret: process.env.JWT_AT_SECRET,
+    accessTokenExpiresIn: process.env.JWT_AT_EXPIRES_IN,
+  };
+  const validationSchema = Joi.object<JWTConfig>({
+    accessTokenSecret: Joi.string().required(),
+    accessTokenExpiresIn: Joi.string().required(),
+  });
 
-
- function validateConfig(config: JWTConfig): void {
-   const { error } = validationSchema.validate(config, { abortEarly: true });
-   if (error) {
-     throw new Error(`[Account JWTConfig Validation Error]: ${error.message}`);
-   }
- }
-
- function getConfig(): JWTConfig {
-   const config: JWTConfig = {
-     accessTokenSecret: process.env.JWT_ACCESS_TOKEN_SECRET,
-     accessTokenExpiresIn: process.env.JWT_ACCESS_TOKEN_EXPIRES_IN,
-   };
-
-   validateConfig(config);
+  const { error } = validationSchema.validate (config, {abortEarly: true});
+  if (error) {
+    throw new Error (
+      `[JWT Config]: Environments validation failed. Please check .env file.
+      Error message: ${error.message}`
+    );
+  }
    return config;
- }
-
- export default registerAs('jwt', getConfig);
+ });
