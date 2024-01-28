@@ -16,6 +16,6 @@ import { VideoBlogRepository } from '../blog/video-content/video-blog.repository
 @Module({
   imports: [],
   controllers: [LikeController],
-  providers: [LikeRepository,  LikeService, BlogRepository,  VideoBlogRepository, TextBlogRepository, LinkBlogRepository, PhotoBlogRepository, QuoteBlogRepository, BaseBlogContentService],
+  providers: [LikeRepository, PrismaClientService, LikeService, BlogRepository,  VideoBlogRepository, TextBlogRepository, LinkBlogRepository, PhotoBlogRepository, QuoteBlogRepository, BaseBlogContentService],
 })
 export class LikeModule {}
