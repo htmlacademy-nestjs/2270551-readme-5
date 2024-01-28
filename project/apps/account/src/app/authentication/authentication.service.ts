@@ -27,7 +27,7 @@ export class AuthenticationService {
       const {email, firstname, lastname, password} = dto;
       const blogUser = {
         email, firstname, lastname, status: UserStatus.User,
-        avatar: '', dateOfBirth: dayjs(dateBirth).toDate(),
+        avatar: '',
         passwordHash: ''
       };
       const existUser = await this.blogUserRepository
