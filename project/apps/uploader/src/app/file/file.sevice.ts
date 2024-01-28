@@ -1,7 +1,7 @@
 import {UploaderConfig} from '@project/shared/config/uploader';
 import { Inject, Injectable } from '@nestjs/common';
 import { ConfigType } from '@nestjs/config';
-import { ensureDir } from 'fx-extra';
+import { ensureDir } from 'fs-extra';
 import { writeFile } from 'node:fs/promises';
 import uploaderConfig from 'libs/shared/config/uploader/src/lib/uploader.config';
 
