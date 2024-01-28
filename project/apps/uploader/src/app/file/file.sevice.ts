@@ -20,6 +20,4 @@ export class FileService {
 
     return destinationFile;
   }
-
-  )
 }
