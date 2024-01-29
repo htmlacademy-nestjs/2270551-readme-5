@@ -27,6 +27,9 @@
       "@project/libs/shared/blog/models/src": [
         "libs/shared/blog/models/src/lib/prisma-client.service.ts"
       ],
+      "@project/libs/shared/config/blog": [
+        "libs/shared/config/blog/src/index.ts"
+      ],
       "@project/libs/shared/config/notify": [
         "libs/shared/config/notify/src/index.ts"
       ],
