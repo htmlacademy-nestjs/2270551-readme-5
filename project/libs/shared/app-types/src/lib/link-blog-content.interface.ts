@@ -1,12 +1,22 @@
 import { Expose } from 'class-transformer';
+import { IsNotEmpty, IsString, IsOptional, IsUrl, MaxLength } from 'class-validator';
 
-export class LinkBlogContent {
+export class LinkBlogContentCreate {
   @Expose()
-  link: string;
-  @Expose()
-  description?: string;
-  @Expose()
-  id?: string;
+   @IsNotEmpty()
+   @IsUrl()
+   link: string;
 
-  blogId: string;
-}
+   @Expose()
+   @IsString()
+   @IsOptional()
+   @MaxLength(300)
+   description?: string;
+ }
+
+ export class LinkBlogContent extends LinkBlogContentCreate {
+   @Expose()
+   id?: string;
+
+   blogId?: string;
+ }

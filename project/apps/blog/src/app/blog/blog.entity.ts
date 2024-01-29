@@ -1,14 +1,18 @@
 import {Blog, BlogContent, BlogStatus, BlogType} from '@project/libs/shared/app-types'
-import { Category } from 'libs/shared/app-types/src/lib/category.interface';
+import { Category } from '@project/libs/shared/app/types';
+import { PrismaClientService } from '@project/libs/shared/blog/models';
 
 export class BlogEntity implements Blog {
+  static fromObject(client: PrismaClientService, fromObject: any) {
+    throw new Error('Method not implemented.');
+  }
   public type: BlogType;
   public id: string;
   public contentId: string;
   public createdDate: Date;
   public postedDate: Date;
   public status: BlogStatus;
-  public author: string;
+  public userId: string;
   public tags: string[];
   public repost: boolean;
   public repostId: string;
@@ -24,7 +28,7 @@ export class BlogEntity implements Blog {
     return {
       type: this.type,
       id: this.id,
-      author: this.author,
+      userId: this.userId,
       contentId: this.contentId,
       createdDate: this.createdDate,
       postedDate: this.postedDate,
@@ -40,7 +44,7 @@ export class BlogEntity implements Blog {
   public populate(data: Blog): void {
     this.type = data.type;
     this.id = data.id;
-    this.author = data.author;
+    this.userId = data.userId;
     this.content = data.content;
     this.createdDate = data.createdDate;
     this.postedDate = data.postedDate;

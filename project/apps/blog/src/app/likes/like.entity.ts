@@ -22,4 +22,7 @@ export class LikeEntity implements Like {
     this.blogId = data.blogId;
     this.userId = data.userId;
   }
+  static fromObject(data: Like): LikeEntity {
+    return new LikeEntity(data);
+  }
 }
