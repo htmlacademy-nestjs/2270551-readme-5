@@ -33,6 +33,9 @@
       "@project/libs/shared/config/notify": [
         "libs/shared/config/notify/src/index.ts"
       ],
+      "@project/libs/shared/config/user": [
+        "libs/shared/config/user/src/index.ts"
+      ],
       "@project/libs/shared/core": ["libs/shared/core/src/index.ts"],
       "@project/libs/shared/helpers": ["libs/shared/helpers/src/index.ts"],
       "@project/shared/config/account": [
