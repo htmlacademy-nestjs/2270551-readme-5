@@ -1,43 +1,67 @@
-import { Body, Controller, Post, Get, Param, Put, Delete, Query } from '@nestjs/common';
- import { BlogService } from './blog.service';
- import { CreateBlogDto } from './dto/create-blog.dto';
- import { UpdateBlogDto } from './dto/update-blog.dto';
- import { BlogQuery } from './query/blog-query';
+import { BlogType, SortDirection, SortType } from '@project/libs/shared/app-types';
+ import { VideoBlogEntity } from './video-content/video-blog.entity';
+ import { LinkBlogEntity } from './link-content/link-blog.entity';
+ import { PhotoBlogEntity } from './photo-content/photo-blog.entity';
+ import { QuoteBlogEntity } from './quote-content/quote-blog.entity';
+ import { TextBlogEntity } from './text-content/text-blog.entity';
+ import { Prisma } from '@prisma/client';
 
- @Controller('blog')
- export class BlogController {
-  constructor(
-    public readonly blogService: BlogService
-  ) {}
-  @Post('')
-  public async create(@Body() dto: CreateBlogDto) {
-    const blog = await this.blogService.create(dto);
-    return blog;
+ export type UnionBlogEntity = VideoBlogEntity | TextBlogEntity | LinkBlogEntity | PhotoBlogEntity | QuoteBlogEntity;
+
+export const isVideoBlogEntity = (type: BlogType, entity: UnionBlogEntity): entity is VideoBlogEntity => {
+  return type === BlogType.Video;
+}
+export const isTextBlogEntity = (type: BlogType, entity: UnionBlogEntity): entity is TextBlogEntity => {
+  return type === BlogType.Text;
+}
+export const isLinkBlogEntity = (type: BlogType, entity: UnionBlogEntity): entity is LinkBlogEntity => {
+  return type === BlogType.Link;
+}
+export const isPhotoBlogEntity = (type: BlogType, entity: UnionBlogEntity): entity is PhotoBlogEntity => {
+  return type === BlogType.Photo;
+}
+ export const isQuoteBlogEntity = (type: BlogType, entity: UnionBlogEntity): entity is QuoteBlogEntity => {
+   return type === BlogType.Quote;
+ }
+
+ export interface BlogSorting {
+   sort?: SortType;
+   direction?: SortDirection;
+ }
+
+ export interface BlogFilter {
+   type?: BlogType
+ }
+
+ export function blogFilter(filter: BlogFilter): Prisma.BlogWhereInput | undefined {
+   if (!filter) {
+     return undefined;
    }
 
-   @Get('')
-   public async find(@Query() query: BlogQuery) {
-     const blogs = await this.blogService.find(query);
-     return blogs;
+   let prismaFilter: Prisma.BlogWhereInput = {};
+
+   if (filter.type) {
+     prismaFilter = { type: filter.type };
    }
 
-   @Get(':id')
-  public async findById(@Param('id') id: string) {
-    const blog = await this.blogService.findById(id);
-    return blog;
-  }
-  @Put(':id')
-  public async updateById(
-    @Body() dto: UpdateBlogDto,
-    @Param('id') id: string
-    ) {
-    const blog = await this.blogService.updateById(id, dto);
-    return blog;
-  }
+   return prismaFilter;
+ }
 
-   @Delete(':id')
-   public async deleteById(@Param('id') id: string) {
-     const blog = await this.blogService.deleteById(id);
-     return blog;
+ export function blogSort(sortParams: BlogSorting): Prisma.BlogOrderByWithRelationInput | undefined {
+   if (!sortParams) {
+     return undefined;
    }
+   const {sort, direction} = sortParams;
+   let prismaFilter: Prisma.BlogOrderByWithRelationInput = {};
+   if (sort === SortType.Date) {
+     prismaFilter = {[sort]: direction}
+   }
+
+   if (sort === SortType.Likes || sort === SortType.Comments) {
+     prismaFilter = { [sort]: {
+       _count: direction
+     } };
+   }
+
+   return prismaFilter;
  }
