@@ -5,9 +5,8 @@ import { TextBlogContent, TextBlogContentCreate } from './text-blog-content.inte
 import { VideoBlogContent, VideoBlogContentCreate } from './video-blog-content.interface';
 
 export class BaseBlogContent {
-  id?: string;
-}
+   id?: string;
+ }
 
 export type BlogContent = LinkBlogContent | TextBlogContent | VideoBlogContent | PhotoBlogContent | QuoteBlogContent;
-
 export type BlogContentCreate = LinkBlogContentCreate | TextBlogContentCreate | VideoBlogContentCreate | PhotoBlogContentCreate | QuoteBlogContentCreate;
