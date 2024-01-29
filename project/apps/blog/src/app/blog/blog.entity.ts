@@ -1,7 +1,11 @@
 import {Blog, BlogContent, BlogStatus, BlogType} from '@project/libs/shared/app-types'
 import { Category } from '@project/libs/shared/app/types';
+import { PrismaClientService } from '@project/libs/shared/blog/models';
 
 export class BlogEntity implements Blog {
+  static fromObject(client: PrismaClientService, fromObject: any) {
+    throw new Error('Method not implemented.');
+  }
   public type: BlogType;
   public id: string;
   public contentId: string;
