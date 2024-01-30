@@ -4,7 +4,7 @@ import { ConfigType } from '@nestjs/config';
 import dayjs from 'dayjs';
 import { RefreshTokenEntity } from './refresh-token.entity';
 import { parseTime } from '@project/libs/shared/helpers';
-import { jwtConfig } from '@project/libs/config/user';
+import { jwtConfig } from '@project/libs/shared/config/user';
 import { RefreshTokenPayload } from '@project/libs/shared/app-types';
 
 @Injectable()

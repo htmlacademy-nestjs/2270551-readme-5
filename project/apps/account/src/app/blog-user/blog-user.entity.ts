@@ -17,6 +17,10 @@ import { SALT_ROUNDS } from './blog-user.constant';
    constructor(user: AuthUser) {
      this.populate(user)
    }
+   name: string;
+   cteatedAt: Date;
+   postsCount?: number;
+   subscribersCount?: number;
 
    public populate(user: AuthUser): void {
     this.email = user.email;

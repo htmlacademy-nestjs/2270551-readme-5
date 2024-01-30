@@ -7,11 +7,16 @@ import { Token } from '@project/libs/shared/app-types';
   timestamps: true
 })
 export class RefreshTokenModel extends Document implements Token {
+  accessToken: string;
   @Prop()
   public createdAt: Date;
 
   @Prop({ required: true })
   public tokenId: string;
+
+
+  @Prop({ required: true })
+  public id: string;
 
   @Prop( { required: true })
   public userId: string;
