@@ -1,23 +1,21 @@
 import {AuthUser, UserStatus} from '@project/libs/shared/app-types'
 import { compare, genSalt, hash } from 'bcrypt';
 import { SALT_ROUND } from './blog-user.constants';
-import {Document} from 'mongoose'
 import { BlogUserModel } from './blog-user.model';
-export class BlogUserEntity implements AuthUser {
+import { Entity } from '@project/libs/shared/core';
+export class BlogUserEntity implements AuthUser, Entity<string> {
   public passwordHash: string;
   public id?: string;
   public email: string;
   public name: string;
-  public avatarId: string;
+  public lastname: string;
+  public firstname: string;
+  public avatar: string;
   public createdAt: Date;
 
   constructor(user: AuthUser) {
     this.populate(user);
   }
-  cteatedAt: Date;
-  firstname: string;
-  lastname: string;
-  avatar?: string;
   status: UserStatus;
   postsCount?: number;
   subscribersCount?: number;
@@ -28,18 +26,21 @@ export class BlogUserEntity implements AuthUser {
       id: this.id,
       email: this.email,
       name: this.name,
-      avatarId: this.avatarId,
+      avatar: this.avatar,
+      firstname: this.firstname,
+      lastname: this.lastname,
+      status: UserStatus.User,
       createdAt: this.createdAt
     };
   }
 
   public populate(data: AuthUser): void {
-    this.avatarId = data.avatar;
+    this.avatar = data.avatar;
     this.email = data.email;
     this.name = data.name;
     this.id = data.id;
     this.passwordHash = data.passwordHash;
-    this.createdAt = data.cteatedAt ?? new Date();
+    this.createdAt = data.createdAt ?? new Date();
   }
 
   public async setPassword(password: string): Promise<BlogUserEntity> {

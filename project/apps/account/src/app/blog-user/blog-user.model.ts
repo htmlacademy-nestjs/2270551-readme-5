@@ -8,7 +8,7 @@ import { Document } from 'mongoose';
  })
  export class BlogUserModel extends Document implements AuthUser {
    name: string;
-   cteatedAt: Date;
+   createdAt: Date;
    postsCount?: number;
    subscribersCount?: number;
    @Prop()

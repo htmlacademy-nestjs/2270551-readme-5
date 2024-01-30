@@ -11,14 +11,13 @@ import { SALT_ROUNDS } from './blog-user.constant';
    public avatar?: string;
    public status: UserStatus;
    public passwordHash: string;
-   //public postsCount?: number;
-   //public subscribersCount?: number;
+
 
    constructor(user: AuthUser) {
      this.populate(user)
    }
    name: string;
-   cteatedAt: Date;
+   createdAt: Date;
    postsCount?: number;
    subscribersCount?: number;
 
@@ -29,8 +28,6 @@ import { SALT_ROUNDS } from './blog-user.constant';
     this.avatar = user.avatar;
     this.status = user.status;
     this.passwordHash = user.passwordHash;
-    //this.postsCount = user.postsCount;
-    //this.subscribersCount = user.subscribersCount;
   }
 
    public toPOJO() {
@@ -42,8 +39,6 @@ import { SALT_ROUNDS } from './blog-user.constant';
        avatar: this.avatar,
        status: this.status,
        passwordHash: this.passwordHash,
-      // postsCount: this.postsCount,
-      // subscribersCount: this.subscribersCount,
      };
    }
 

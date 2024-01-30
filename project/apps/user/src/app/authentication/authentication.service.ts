@@ -6,7 +6,7 @@ import { BlogUserEntity } from '../blog-user/blog-user.entity';
 import { LoginUserDto } from './dto/login-user.dto';
 import { ChangePasswordDto } from './dto/change-password.dto';
 import { JwtService } from '@nestjs/jwt';
-import { JwtToken, User } from '@project/libs/shared/app-types';
+import { JwtToken, User, UserStatus } from '@project/libs/shared/app-types';
 import { ConfigType } from '@nestjs/config';
 import { jwtConfig } from '@project/libs/shared/config/user';
 import { RefreshTokenService } from '../refresh-token/refresh-token.service';
@@ -36,12 +36,12 @@ export class AuthenticationService {
     const blogUser = {
       email,
       name,
-      status,
+      status: UserStatus.User,
       avatarId,
-      cteatedAt: Date,
+      createdAt: new Date,
       lastname: '',
       firstname: '',
-      passwordHash: ''
+      passwordHash: '',
     }
 
     const userEntity = await new BlogUserEntity(blogUser).setPassword(password);

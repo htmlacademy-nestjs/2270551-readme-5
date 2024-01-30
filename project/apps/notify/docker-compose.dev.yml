@@ -41,7 +41,7 @@ services:
          - readme-551.notify.mongodb:/data/db
 
        healthcheck:
-         test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/readme-551-notify --quiet
+         test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/readme-551 --quiet
          interval: 10s
          timeout: 10s
          retries: 5
@@ -62,4 +62,4 @@ services:
        ME_CONFIG_MONGODB_URL: mongodb://${MONGO_USER}:${MONGO_PASSWORD}@readme-551.notify.mongodb:27017/
 
 volumes:
-   readme-551notify.mongodb:
+   readme-551.notify.mongodb:
