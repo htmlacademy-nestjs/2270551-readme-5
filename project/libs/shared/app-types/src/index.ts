@@ -23,5 +23,9 @@ export * from './lib/like.interface';
 export * from './lib/category.interface';
 export * from './lib/comment.interface';
 export * from './lib/subscriber.interface';
+export * from './lib/rabbit-routing.enum';
+export * from './lib/refresh-token-payload.interface';
+export * from './lib/request-with-token-payload';
+export * from './lib/jwt-token.interface';
 
 

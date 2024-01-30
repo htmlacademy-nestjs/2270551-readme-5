@@ -7,6 +7,10 @@ import { Document } from 'mongoose';
    timestamps: true,
  })
  export class BlogUserModel extends Document implements AuthUser {
+   name: string;
+   cteatedAt: Date;
+   postsCount?: number;
+   subscribersCount?: number;
    @Prop()
    public avatar: string;
 
