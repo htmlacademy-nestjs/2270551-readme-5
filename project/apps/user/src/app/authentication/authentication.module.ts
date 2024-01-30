@@ -4,7 +4,7 @@ import { AuthenticationController } from './authentication.controller';
 import { BlogUserModule } from '../blog-user/blog-user.module';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
-import { getJwtOptions } from '@project/libs/config/user';
+import { getJwtOptions } from '@project/libs/shared/config/user';
 import { JwtAccessStrategy } from './strategies/jwt-access.strategy';
 import { NotifyModule } from '../notify/notify.module';
 import { JwtRefreshStrategy } from './strategies/jwt-refresh.strategy';

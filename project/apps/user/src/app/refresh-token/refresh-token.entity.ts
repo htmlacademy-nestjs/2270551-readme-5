@@ -1,4 +1,4 @@
-import { Entity } from '@project/libs/shared/core';
+import { DefaultPojoType, Entity } from '@project/libs/shared/core';
 import { Token } from '@project/libs/shared/app-types';
 
 export class RefreshTokenEntity implements Token ,Entity<string> {
@@ -11,18 +11,22 @@ export class RefreshTokenEntity implements Token ,Entity<string> {
   constructor(token: Token) {
     this.populate(token);
   }
-
-
-  public toPlainObject() {
-    return {
-      id: this.id,
-      userId: this.userId,
-      tokenId: this.tokenId,
-      createdAt: this.createdAt,
-      expiresIn: this.expiresIn,
-
-    };
+  toPOJO(): DefaultPojoType {
+    throw new Error('Method not implemented.');
   }
+  accessToken: string;
+
+
+  //public toPOJO() {
+    //return {
+     // id: this.id,
+     // userId: this.userId,
+     // tokenId: this.tokenId,
+     // createdAt: this.createdAt,
+     // expiresIn: this.expiresIn,
+
+    //};
+  //}
 
   public populate(data: Token): void {
     this.userId = data.userId;

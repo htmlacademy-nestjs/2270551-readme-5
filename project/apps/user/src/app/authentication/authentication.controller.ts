@@ -34,7 +34,7 @@ export class AuthenticationController {
     const { email, name } = dto;
     const newUser = await this.authService.register(dto);
     await this.notifyService.registerSubscriber({ email, name });
-    return fillDto(UserRdo, newUser.toPlainObject());
+    return fillDto(UserRdo, newUser.toPOJO());
   }
 
   @UseGuards(LocalAuthGuard)

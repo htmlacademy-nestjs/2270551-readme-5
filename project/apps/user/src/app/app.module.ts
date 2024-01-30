@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { BlogUserModule } from './blog-user/blog-user.module';
-import { ConfigUserModule, getMongooseOptions } from '@project/libs/config/user';
+import { ConfigUserModule, getMongooseOptions } from '@project/libs/shared/config/user';
 import { NotifyModule } from './notify/notify.module';
 @Module({
   imports: [

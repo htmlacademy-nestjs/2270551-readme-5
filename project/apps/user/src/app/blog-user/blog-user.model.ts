@@ -1,12 +1,19 @@
 import { Document } from 'mongoose';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { AuthUser } from '@project/libs/shared/app-types';
+import { AuthUser, UserStatus } from '@project/libs/shared/app-types';
 
 @Schema({
   collection: 'users',
   timestamps: true,
 })
 export class BlogUserModel extends Document implements AuthUser {
+  cteatedAt: Date;
+  firstname: string;
+  lastname: string;
+  avatar?: string;
+  status: UserStatus;
+  postsCount?: number;
+  subscribersCount?: number;
   @Prop({
     type: String,
     default: null

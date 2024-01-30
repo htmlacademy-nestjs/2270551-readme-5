@@ -6,6 +6,7 @@ import { RefreshTokenEntity } from './refresh-token.entity';
 import { parseTime } from '@project/libs/shared/helpers';
 import { jwtConfig } from '@project/libs/shared/config/user';
 import { RefreshTokenPayload } from '@project/libs/shared/app-types';
+import { string } from 'joi';
 
 @Injectable()
 export class RefreshTokenService {
@@ -20,7 +21,9 @@ export class RefreshTokenService {
       tokenId: payload.tokenId,
       createdAt: new Date(),
       userId: payload.sub,
-      expiresIn: dayjs().add(timeValue.value, timeValue.unit).toDate()
+      expiresIn: dayjs().add(timeValue.value, timeValue.unit).toDate(),
+      accessToken: payload.tokenId,
+      id: '',
     });
 
     return this.refreshTokenRepository.create(refreshToken);

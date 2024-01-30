@@ -8,7 +8,7 @@ import { ChangePasswordDto } from './dto/change-password.dto';
 import { JwtService } from '@nestjs/jwt';
 import { JwtToken, User } from '@project/libs/shared/app-types';
 import { ConfigType } from '@nestjs/config';
-import { jwtConfig } from '@project/libs/config/user';
+import { jwtConfig } from '@project/libs/shared/config/user';
 import { RefreshTokenService } from '../refresh-token/refresh-token.service';
 import { createJWTPayload } from '@project/libs/shared/helpers';
 import * as crypto from 'node:crypto';
@@ -36,7 +36,11 @@ export class AuthenticationService {
     const blogUser = {
       email,
       name,
+      status,
       avatarId,
+      cteatedAt: Date,
+      lastname: '',
+      firstname: '',
       passwordHash: ''
     }
 
@@ -59,7 +63,7 @@ export class AuthenticationService {
       throw new UnauthorizedException(AUTH_USER_PASSWROD_WRONG);
     }
 
-    return userEntity.toPlainObject();
+    return userEntity.toPOJO();
   }
 
   public async changePassword(dto: ChangePasswordDto) {

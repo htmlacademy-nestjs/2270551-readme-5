@@ -4,7 +4,7 @@ import { AmqpConnection } from '@golevelup/nestjs-rabbitmq';
 import { ConfigType } from '@nestjs/config';
 import { CreateSubscriberDto } from './dto/create-subscriber.dto';
 import { RabbitRouting } from '@project/libs/shared/app-types';
-import { rabbitConfig } from '@project/libs/config/user';
+import { rabbitConfig } from '@project/libs/shared/config/user';
 
 @Injectable()
 export class NotifyService {

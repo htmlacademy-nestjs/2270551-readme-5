@@ -1,4 +1,4 @@
-import {AuthUser} from '@project/libs/shared/app-types'
+import {AuthUser, UserStatus} from '@project/libs/shared/app-types'
 import { compare, genSalt, hash } from 'bcrypt';
 import { SALT_ROUND } from './blog-user.constants';
 import {Document} from 'mongoose'
@@ -14,8 +14,15 @@ export class BlogUserEntity implements AuthUser {
   constructor(user: AuthUser) {
     this.populate(user);
   }
+  cteatedAt: Date;
+  firstname: string;
+  lastname: string;
+  avatar?: string;
+  status: UserStatus;
+  postsCount?: number;
+  subscribersCount?: number;
 
-  public toPlainObject() {
+  public toPOJO() {
     return {
       passwordHash: this.passwordHash,
       id: this.id,
@@ -27,7 +34,7 @@ export class BlogUserEntity implements AuthUser {
   }
 
   public populate(data: AuthUser): void {
-    this.avatarId = data.avatarId;
+    this.avatarId = data.avatar;
     this.email = data.email;
     this.name = data.name;
     this.id = data.id;

@@ -20,6 +20,6 @@ export class BlogUserController {
   @Get(':id')
   public async show(@Param('id', MongoIdValidationPipe) id: string) {
     const existUser = await this.userService.getUser(id);
-    return fillDto(UserRdo, existUser.toPlainObject());
+    return fillDto(UserRdo, existUser.toPOJO());
   }
 }
