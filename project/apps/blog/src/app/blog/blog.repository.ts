@@ -6,6 +6,9 @@ import { BlogQuery } from './query/blog-query';
 
 @Injectable()
 export class BlogRepository extends BaseMemoryRepository<BlogEntity> {
+  findNew(dateRange: Date) {
+    throw new Error('Method not implemented.');
+  }
   find(param: BlogQuery) {
     throw new Error('Method not implemented.');
   }
