@@ -8,13 +8,13 @@ services:
      environment:
        MONGO_INITDB_ROOT_USERNAME: admin
        MONGO_INITDB_ROOT_PASSWORD: test
-       MONGO_INITDB_DATABASE: readme-551
+       MONGO_INITDB_DATABASE: readme-551.account.mongo
 
      ports:
        - 27017:27017
 
      volumes:
-       - readme-551.account.mongo:/data/db
+       - readme-551.mongo.account:/data/db
 
      healthcheck:
        test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/readme-551 --quiet
@@ -34,4 +34,4 @@ services:
        ME_CONFIG_MONGODB_URL: mongodb://admin:test@readme-551.account.mongo:27017/
 
 volumes:
-   readme-551.account.mongo:
+   readme-551.mongo.account:
