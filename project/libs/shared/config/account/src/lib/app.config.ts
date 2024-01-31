@@ -1,8 +1,8 @@
 import { registerAs } from '@nestjs/config';
- import * as Joi from 'joi';
+import * as Joi from 'joi';
 
- //данные порта по умолчанию если он не задан
- const DEFAULT_PORT = 3000;
+
+ const DEFAULT_PORT = 3333;
  const ENVIRONMENTS = ['development', 'production', 'stage'] as const;
 
  type Environment = typeof ENVIRONMENTS[number];
@@ -11,13 +11,13 @@ import { registerAs } from '@nestjs/config';
    environment: string;
    port: number;
  }
- // схема валидации joi
+
  const validationSchema = Joi.object({
    environment: Joi.string().valid(...ENVIRONMENTS).required(),
    port: Joi.number().port().default(DEFAULT_PORT),
  });
 
-  //функция прерывания по ошибке
+
  function validateConfig(config: ApplicationConfig): void {
    const { error } = validationSchema.validate(config, { abortEarly: true });
    if (error) {
@@ -25,7 +25,7 @@ import { registerAs } from '@nestjs/config';
    }
  }
 
-  //запуск функции валидации
+
  function getConfig(): ApplicationConfig {
    const config: ApplicationConfig = {
      environment: process.env.NODE_ENV as Environment,
