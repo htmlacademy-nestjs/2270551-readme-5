@@ -14,7 +14,7 @@ services:
        - 27017:27017
 
      volumes:
-       - readme-551.mongo.account:/data/db
+       - readme-551.account.mongo:/data/db
 
      healthcheck:
        test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/readme-551 --quiet
@@ -22,10 +22,10 @@ services:
        timeout: 10s
        retries: 5
 
-   readme-551.user.mongo.ui:
+   readme-551.account.mongo.ui:
      image: mongo-express
      restart: always
-     container_name: readme-551.user.mongo.ui
+     container_name: readme-551.account.mongo.ui
      ports:
        - 8081:8081
      environment:
@@ -34,4 +34,4 @@ services:
        ME_CONFIG_MONGODB_URL: mongodb://admin:test@readme-551.account.mongo:27017/
 
 volumes:
-   readme-551.mongo.account:
+   readme-551.account.mongo:
