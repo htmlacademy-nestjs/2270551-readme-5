@@ -3,11 +3,8 @@ import {
   HttpStatus, Injectable, NotFoundException,
   UnauthorizedException
 } from '@nestjs/common';
-import dayjs from 'dayjs';
 import { JwtService } from '@nestjs/jwt';
 import { Token, TokenPayload, User, UserStatus } from '@project/libs/shared/app-types';
-import { ConfigType } from '@nestjs/config';
-import { dbConfig } from '@project/shared/config/account';
 import { BlogUserRepository } from '../blog-user/blog-user.repository';
 import { CreateUserDto } from './dto/create-user.dto';
 import { AUTH_USER_EXISTS, AUTH_USER_NOT_FOUND, AUTH_USER_PASSWORD_WRONG } from './authentication.constant';
@@ -28,6 +25,7 @@ export class AuthenticationService {
       const blogUser = {
         email, firstname, lastname, status: UserStatus.User,
         avatar: '',
+        createdAt: new Date,
         passwordHash: ''
       };
       const existUser = await this.blogUserRepository

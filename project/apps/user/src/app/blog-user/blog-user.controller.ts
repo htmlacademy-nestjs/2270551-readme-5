@@ -1,9 +1,8 @@
-import { Controller, Get, HttpStatus, Param, UseGuards } from '@nestjs/common';
+import { Controller, Get, HttpStatus, Param } from '@nestjs/common';
 import { BlogUserService } from './blog-user.service';
 import { fillDto } from '@project/libs/shared/helpers';
 import { UserRdo } from '../authentication/rdo/user.rdo';
 import { MongoIdValidationPipe } from '@project/libs/shared/core';
-import { JwtAuthGuard } from '../authentication/guards/jwt-auth.guard';
 import { ApiResponse } from '@nestjs/swagger';
 
 @Controller('user')

@@ -1,8 +1,8 @@
 import { registerAs } from '@nestjs/config';
  import * as Joi from 'joi';
 
- const DEFAULT_PORT = 3002;
- const DEFAULT_MONGO_PORT = 27017;
+ const DEFAULT_PORT = 3030;
+ const DEFAULT_MONGO_PORT = 27019;
  const ENVIRONMENTS = ['development', 'production', 'stage'] as const;
  const DEFAULT_RABBIT_PORT = 5672;
  const DEFAULT_SMTP_PORT = 25;

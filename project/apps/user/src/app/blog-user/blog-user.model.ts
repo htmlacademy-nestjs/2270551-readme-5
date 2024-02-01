@@ -7,7 +7,7 @@ import { AuthUser, UserStatus } from '@project/libs/shared/app-types';
   timestamps: true,
 })
 export class BlogUserModel extends Document implements AuthUser {
-  cteatedAt: Date;
+  createdAt: Date;
   firstname: string;
   lastname: string;
   avatar?: string;

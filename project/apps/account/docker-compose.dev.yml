@@ -8,7 +8,7 @@ services:
      environment:
        MONGO_INITDB_ROOT_USERNAME: admin
        MONGO_INITDB_ROOT_PASSWORD: test
-       MONGO_INITDB_DATABASE: readme-551
+       MONGO_INITDB_DATABASE: readme-551.account.mongo
 
      ports:
        - 27017:27017
@@ -22,10 +22,10 @@ services:
        timeout: 10s
        retries: 5
 
-   readme-551.user.mongo.ui:
+   readme-551.account.mongo.ui:
      image: mongo-express
      restart: always
-     container_name: readme-551.user.mongo.ui
+     container_name: readme-551.account.mongo.ui
      ports:
        - 8081:8081
      environment:
